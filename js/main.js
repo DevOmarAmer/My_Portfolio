@@ -1,6 +1,9 @@
 // Main JavaScript for Portfolio Website
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Load projects dynamically
+    loadProjects();
+    
     // Typing Animation for Roles with forward slashes
     // Typing Effect
     const typedTextSpan = document.querySelector('.typed-text');
@@ -382,9 +385,11 @@ if (mobileNavToggle && mobileNav && mobileNavOverlay) {
 const menuToggle = document.getElementById('menu-toggle');
 const navMenu = document.getElementById('nav-menu');
 
-menuToggle.onclick = () => {
-    navMenu.classList.toggle('open');
-};
+if (menuToggle && navMenu) {
+    menuToggle.onclick = () => {
+        navMenu.classList.toggle('open');
+    };
+}
 
 // قفل المينيو لما تضغط على لينك
 navLinks.forEach(link => {
@@ -393,6 +398,169 @@ navLinks.forEach(link => {
     };
 });
 
-
-
 });
+
+// Load and render projects dynamically
+async function loadProjects() {
+    console.log('loadProjects() called');
+    try {
+        console.log('Fetching projects.json...');
+        const response = await fetch('data/projects.json');
+        console.log('Response received:', response.status);
+        const data = await response.json();
+        console.log('Projects data loaded:', data);
+        renderProjects(data.projects);
+    } catch (error) {
+        console.error('Error loading projects:', error);
+        console.warn('Loading fallback projects data...');
+        // Fallback: Load projects directly (for file:// protocol)
+        loadFallbackProjects();
+    }
+}
+
+// Fallback projects data (loaded when fetch fails)
+function loadFallbackProjects() {
+    const fallbackProjects = [
+        {
+            "id": "skill-swap",
+            "title": "SkillSwap",
+            "category": "mobile",
+            "categories": ["mobile"],
+            "image": "image/skill_swap/Skill Swap App.png",
+            "description": "Innovative skill exchange platform with user profiles, skill matching algorithm, in-app messaging, and review system implemented with Flutter and Firebase",
+            "detailsPage": "skill_swap_details.html",
+            "githubLink": "https://github.com/DevOmarAmer/skill_swap",
+            "technologies": ["Flutter", "Firebase", "Dart"],
+            "featured": true
+        },
+        {
+            "id": "bookly",
+            "title": "Bookly App",
+            "category": "mobile",
+            "categories": ["mobile"],
+            "image": "image/bookly/bokly_photo.jpg",
+            "description": "A sophisticated book discovery platform with clean UI, search functionality, and integrated reading experience using Flutter and Google Books API",
+            "detailsPage": "bookly-details.html",
+            "githubLink": "https://github.com/DevOmarAmer/bookly_app_clean_arch",
+            "technologies": ["Flutter", "Google Books API", "Clean Architecture"],
+            "featured": true
+        },
+        {
+            "id": "notes-app",
+            "title": "Notes App",
+            "category": "mobile",
+            "categories": ["mobile", "ui"],
+            "image": "image/notes/notes-photo.jpg",
+            "description": "Feature-rich note-taking application with cloud sync, categories, rich text formatting, and dark mode support built with Flutter and Firebase",
+            "detailsPage": "notes_app.html",
+            "githubLink": "https://github.com/DevOmarAmer/notes_app",
+            "technologies": ["Flutter", "Firebase", "Hive"],
+            "featured": true
+        },
+        {
+            "id": "dashboard",
+            "title": "Dashboard",
+            "category": "web",
+            "categories": ["mobile", "web"],
+            "image": "image/dashboard/photo.jpg",
+            "description": "Responsive admin dashboard with data visualization, user management, and analytics features that adapts seamlessly to mobile, tablet, and desktop screens",
+            "detailsPage": "dashboard_details.html",
+            "githubLink": "https://github.com/DevOmarAmer/flutter_responsive_dashboard",
+            "technologies": ["Flutter", "Charts", "Responsive Design"],
+            "featured": true
+        },
+        {
+            "id": "fire-detection",
+            "title": "Fire Detection",
+            "category": "mobile",
+            "categories": ["mobile"],
+            "image": "image/firedetection app/photo.png",
+            "description": "IoT-integrated mobile application for real-time fire and smoke detection in vehicles with push notifications, location tracking, and comprehensive safety analytics",
+            "detailsPage": "fire_detection.html",
+            "githubLink": "https://github.com/DevOmarAmer/fire_detection",
+            "technologies": ["Flutter", "IoT", "Firebase", "Real-time Monitoring"],
+            "featured": true
+        },
+        {
+            "id": "weather-app",
+            "title": "Weather App",
+            "category": "mobile",
+            "categories": ["mobile", "ui"],
+            "image": "image/weather_app/photo.jpg",
+            "description": "Elegant weather application featuring real-time forecasts, hourly and weekly predictions, location-based services, and beautiful animated weather visualizations",
+            "detailsPage": "weather_app.html",
+            "githubLink": "https://github.com/DevOmarAmer/weather_app",
+            "technologies": ["Flutter", "Weather API", "Animations"],
+            "featured": false
+        }
+    ];
+    
+    renderProjects(fallbackProjects);
+}
+
+// Render projects in the grid
+function renderProjects(projects) {
+    console.log('renderProjects called with', projects.length, 'projects');
+    const projectsGrid = document.querySelector('.projects-grid');
+    if (!projectsGrid) {
+        console.error('Projects grid not found!');
+        return;
+    }
+    if (!projects) {
+        console.error('No projects data!');
+        return;
+    }
+
+    projectsGrid.innerHTML = projects.map(project => `
+        <div class="project-card animate-on-scroll" data-animation="fadeInUp" data-category="${project.categories.join(' ')}">
+            <div class="project-image">
+                <img src="${project.image}" alt="${project.title}" loading="lazy">
+                <div class="project-overlay">
+                    <div class="project-links">
+                        ${project.detailsPage ? `<a href="${project.detailsPage}" class="project-link"><i class="fas fa-link"></i></a>` : ''}
+                        ${project.githubLink ? `<a href="${project.githubLink}" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>` : ''}
+                    </div>
+                </div>
+            </div>
+            <div class="project-info">
+                <span class="project-category">${getCategoryLabel(project.category)}</span>
+                <h3 class="project-title">${project.title}</h3>
+                <p class="project-desc">${project.description}</p>
+                ${project.detailsPage ? `<a href="${project.detailsPage}" class="btn btn-sm">View Details</a>` : ''}
+            </div>
+        </div>
+    `).join('');
+
+    // Re-initialize animations for new elements
+    setTimeout(() => {
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+        const triggerBottom = window.innerHeight * 0.8;
+        
+        animateElements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            
+            if (elementTop < triggerBottom) {
+                const animationType = element.dataset.animation || 'fadeIn';
+                element.classList.add('animated', animationType);
+                
+                if (element.dataset.delay) {
+                    element.style.animationDelay = element.dataset.delay + 's';
+                }
+                
+                if (element.dataset.duration) {
+                    element.style.animationDuration = element.dataset.duration + 's';
+                }
+            }
+        });
+    }, 100);
+}
+
+// Get category label
+function getCategoryLabel(category) {
+    const labels = {
+        'mobile': 'Flutter App',
+        'web': 'Web App',
+        'ui': 'UI/UX Design'
+    };
+    return labels[category] || 'Flutter App';
+}

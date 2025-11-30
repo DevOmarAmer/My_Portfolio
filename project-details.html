@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Project Details</title>
+    <link rel="stylesheet" href="css/details_page_syle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h2 id="navTitle">Project</h2>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Loading State -->
+        <section class="loading-state" id="loadingState" style="display: flex; justify-content: center; align-items: center; min-height: 50vh;">
+            <div style="text-align: center;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: #4361ee;"></i>
+                <p style="margin-top: 1rem; font-size: 1.2rem; color: #6c757d;">Loading project details...</p>
+            </div>
+        </section>
+
+        <!-- Project Details -->
+        <section class="project-details" id="projectDetails" style="display: none;">
+            <h1 id="projectTitle">Project Title</h1>
+            
+            <div class="project-image">
+                <img id="projectCover" src="" alt="Project Cover">
+            </div>
+            
+            <div class="project-info">
+                <h2>Overview</h2>
+                <p id="projectOverview"></p>
+
+                <h2>Features</h2>
+                <ul id="projectFeatures">
+                    <!-- Features will be loaded here -->
+                </ul>
+
+                <h2>Technologies Used</h2>
+                <ul id="projectTechnologies">
+                    <!-- Technologies will be loaded here -->
+                </ul>
+
+                <div id="gallerySection" style="display: none;">
+                    <h2>Project Gallery</h2>
+                    <div class="gallery-wrapper">
+                        <div class="gallery" id="projectGallery">
+                            <!-- Gallery images will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div id="videoSection" style="display: none;">
+                    <h2>Project Video</h2>
+                    <div class="video-wrapper" style="display: flex; justify-content: center; align-items: center; padding: 2rem 0;">
+                        <div class="video-container" style="position: relative; width: 300px; height: 640px; border: 4px solid #ff0000; border-radius: 15px;">
+                            <a id="videoLink" href="#" target="_blank">
+                                <img id="videoThumbnail" src="" alt="Project Demo" width="300" height="640" style="border-radius: 10px;">
+                                <i class="fas fa-play-circle" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 50px; color: white;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="githubSection">
+                    <h2>GitHub Repository</h2>
+                    <p>View the source code on GitHub: <a id="githubLink" href="#" target="_blank">GitHub Repository</a></p>
+                </div>
+
+                <h2>Conclusion</h2>
+                <p id="projectConclusion"></p>
+
+                <a href="index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+            </div>
+        </section>
+
+        <!-- Error State -->
+        <section class="error-state" id="errorState" style="display: none; text-align: center; padding: 3rem;">
+            <i class="fas fa-exclamation-circle" style="font-size: 4rem; color: #dc3545; margin-bottom: 1rem;"></i>
+            <h2 style="color: #dc3545; margin-bottom: 1rem;">Project Not Found</h2>
+            <p style="color: #6c757d; margin-bottom: 2rem;">The project you're looking for doesn't exist or has been removed.</p>
+            <a href="index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-title"> &copy; 2025 <span>Omar Amer</span>. All Rights Reserved.</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=100045625816135"><i class="fab fa-facebook-square"></i></a>
+            <a href="https://www.linkedin.com/in/omar-amer-fathy"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.github.com/DevOmarAmer"><i class="fab fa-github-square"></i></a>
+            <a href="https://www.instagram.com/your-username"><i class="fab fa-instagram-square"></i></a>
+        </div>
+    </footer>
+
+    <script src="js/project-details.js"></script>
+</body>
+</html>

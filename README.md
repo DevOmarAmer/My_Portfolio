@@ -1,7 +1,5 @@
 # 🖥️ Omar Amer - Flutter Developer Portfolio
 
-![Portfolio Banner](assets/images/common/omar_cover_2.png)
-
 ## 👋 Welcome!
 
 This is the **personal portfolio website** of **Omar Amer**, a passionate **Flutter Developer** specialized in building cross-platform mobile applications with seamless performance and clean UI/UX design.
@@ -15,17 +13,71 @@ _Replace with your deployed link_
 
 ---
 
+## ✨ New Features (2025 Update)
+
+### 🎨 **Content Management System**
+- **Admin Panel** (`admin/admin.html`) - Easy-to-use interface to manage projects
+- **Dynamic Project Loading** - Projects loaded from JSON instead of hardcoded HTML
+- **No Code Required** - Update your portfolio without touching HTML/CSS
+- **Live Preview** - See changes before publishing
+- **Export/Import** - Backup and restore your projects
+
+### 🔧 **Technical Improvements**
+- ✅ Removed inconsistent CSS files
+- ✅ Consolidated to single optimized CSS (`modern.css`)
+- ✅ Data-driven architecture with JSON
+- ✅ Updated copyright to 2025
+- ✅ Improved project management workflow
+
+---
+
 ## 📂 Project Structure
 
-├── assets/
-│ ├── images/ # All images and project screenshots
-│ └── css/ # Main CSS styles
-├── pages/
-│ └── projects/ # Detailed project pages
-├── index.html # Main Portfolio page
-├── resume.html # CV page
-└── assets/js/main.js # JavaScript for animations and interactivity
+```
+My_Portfolio/
+├── admin/                      # 🆕 Admin Panel
+│   ├── admin.html             # Admin interface
+│   ├── admin-style.css        # Admin styling
+│   ├── admin-script.js        # Admin functionality
+│   └── README.md              # Admin documentation
+├── data/                       # 🆕 Data files
+│   └── projects.json          # Projects data
+├── css/
+│   ├── modern.css             # Main stylesheet (optimized)
+│   ├── normalize.css          # CSS reset
+│   ├── details_page_style.css # Detail pages styling
+│   └── resume_style.css       # Resume page styling
+├── js/
+│   └── main.js                # Main JavaScript (with dynamic loading)
+├── image/                     # Project images
+├── index.html                 # Main Portfolio page
+├── resume.html                # CV page
+└── [project]-details.html     # Individual project pages
+```
 
+
+---
+
+## 🎯 Quick Start
+
+### Managing Your Projects
+
+1. **Open Admin Panel**
+   ```
+   Open admin/admin.html in your browser
+   ```
+
+2. **Add/Edit Projects**
+   - Fill in the form with project details
+   - See live preview as you type
+   - Click "Save Project"
+
+3. **Update Portfolio**
+   - Download the generated `projects.json`
+   - Replace `data/projects.json` with downloaded file
+   - Refresh your portfolio website
+
+📖 **[Read Admin Panel Guide](admin/README.md)** for detailed instructions
 
 ---
 

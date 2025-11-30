@@ -1,0 +1,256 @@
+{
+  "projects": [
+    {
+      "id": "taxi-watan",
+      "title": "Taxi Watan",
+      "image": "image/pro2.jpg",
+      "coverImage": "image/pro2.jpg",
+      "description": "Taxi Watan هو تطبيق نقل ذكي (Ride-Sharing) يهدف إلى توفير تجربة نقل آمنة وسلسة بين الركاب والسائقين",
+      "overview": "Taxi Watan is a smart ride-sharing application that aims to provide a safe and seamless transportation experience between passengers and drivers through a simple user interface and high performance. The application allows users to request a car in seconds, track the driver on the map in real-time, and pay easily through multiple methods. Drivers can manage trips, view new requests, and track earnings through a clear and easy control panel.",
+      "features": [
+        "Real-time driver tracking on map",
+        "Multiple payment methods integration",
+        "User-friendly interface for both passengers and drivers",
+        "Trip history and earnings tracking",
+        "Push notifications for trip updates",
+        "Rating and review system",
+        "In-app messaging between drivers and passengers",
+        "Route optimization"
+      ],
+      "technologies": ["Flutter", "Firebase", "Google Maps API", "Provider"],
+      "technologiesUsed": [
+        "Flutter for cross-platform development",
+        "Dart programming language",
+        "Firebase for authentication and real-time database",
+        "Google Maps API for location services",
+        "Provider for state management",
+        "RESTful APIs for backend integration"
+      ],
+      "gallery": [
+        "image/pro1.jpg",
+        "image/pro2.jpg",
+        "image/pro3.jpg"
+      ],
+      "videoUrl": "",
+      "videoThumbnail": "image/pro2.jpg",
+      "githubLink": "",
+      "conclusion": "Taxi Watan demonstrates advanced mobile development skills with real-time location tracking, payment integration, and a comprehensive ride-sharing ecosystem that serves both passengers and drivers effectively."
+    },
+    {
+      "id": "skill-swap",
+      "title": "SkillSwap",
+      "image": "image/skill_swap/Skill Swap App.png",
+      "coverImage": "image/skill_swap/Skill Swap App.png",
+      "description": "Innovative skill exchange platform with user profiles, skill matching algorithm, in-app messaging, and review system",
+      "overview": "SkillSwap is an innovative platform that connects people who want to exchange skills without monetary transactions. Users can offer their expertise in one area and learn new skills from others, creating a community-driven learning environment. The app features intelligent matching algorithms, secure messaging, and a comprehensive review system.",
+      "features": [
+        "User profile creation with skills listing",
+        "Smart skill matching algorithm",
+        "In-app real-time messaging",
+        "User rating and review system",
+        "Skill categories and search functionality",
+        "Session scheduling and management",
+        "Notification system for matches and messages",
+        "Community feed and skill sharing tips"
+      ],
+      "technologies": ["Flutter", "Firebase", "Dart"],
+      "technologiesUsed": [
+        "Flutter for cross-platform development",
+        "Firebase Authentication for user management",
+        "Cloud Firestore for real-time database",
+        "Firebase Cloud Messaging for notifications",
+        "Provider for state management",
+        "Custom matching algorithm implementation"
+      ],
+      "gallery": [
+        "image/skill_swap/Skill Swap App.png"
+      ],
+      "videoUrl": "",
+      "githubLink": "https://github.com/DevOmarAmer/skill_swap",
+      "conclusion": "SkillSwap showcases expertise in building community-driven applications with complex matching algorithms, real-time communication features, and comprehensive user management systems."
+    },
+    {
+      "id": "bookly",
+      "title": "Bookly App",
+      "image": "image/bookly/bokly_photo.jpg",
+      "coverImage": "image/bookly/cover.jpg",
+      "description": "A sophisticated book discovery platform with clean UI, search functionality, and integrated reading experience",
+      "overview": "The Bookly App is a mobile application designed to help users manage and track their reading habits. It offers an intuitive interface for adding books, tracking progress, and discovering new titles based on personal preferences using the Google Books API.",
+      "features": [
+        "Book management and tracking",
+        "Progress tracking by page count",
+        "Personalized book suggestions",
+        "User-friendly and visually appealing interface",
+        "Responsive design for both mobile and web platforms",
+        "Book search with Google Books API integration",
+        "Reading goals and statistics",
+        "Offline access to saved books"
+      ],
+      "technologies": ["Flutter", "Google Books API", "Clean Architecture"],
+      "technologiesUsed": [
+        "Flutter for cross-platform development",
+        "Dart programming language",
+        "Google Books API for book data",
+        "Clean Architecture pattern",
+        "Hive for offline storage",
+        "Bloc/Cubit for state management",
+        "Dio for API integration"
+      ],
+      "gallery": [
+        "image/pro1.jpg",
+        "image/pro2.jpg",
+        "image/pro3.jpg"
+      ],
+      "videoUrl": "https://youtu.be/T26ziQMK1R0?si=3hqjTz9cG3RAmH9K",
+      "videoThumbnail": "image/bookly/bokly_photo.jpg",
+      "githubLink": "https://github.com/DevOmarAmer/bookly_app_clean_arch",
+      "conclusion": "The Bookly App highlights a deep understanding of mobile application development with Clean Architecture, focusing on functionality, user experience, and integration of third-party APIs for enhanced features."
+    },
+    {
+      "id": "notes-app",
+      "title": "Notes App",
+      "image": "image/notes/notes-photo.jpg",
+      "coverImage": "image/notes/notes-photo.jpg",
+      "description": "Feature-rich note-taking application with cloud sync, categories, and rich text formatting",
+      "overview": "A comprehensive note-taking application that combines local storage with cloud synchronization. Users can create, organize, and sync notes across devices with support for rich text formatting, categories, tags, and a beautiful dark mode interface.",
+      "features": [
+        "Create and edit notes with rich text formatting",
+        "Organize notes with categories and tags",
+        "Cloud synchronization across devices",
+        "Dark mode support",
+        "Search functionality",
+        "Note sharing capabilities",
+        "Offline access with local storage",
+        "Pin important notes",
+        "Color-coded organization",
+        "Archive and trash functionality"
+      ],
+      "technologies": ["Flutter", "Firebase", "Hive"],
+      "technologiesUsed": [
+        "Flutter for cross-platform development",
+        "Firebase Cloud Firestore for cloud sync",
+        "Firebase Authentication",
+        "Hive for local offline storage",
+        "Provider for state management",
+        "Rich text editor implementation",
+        "Material Design principles"
+      ],
+      "gallery": [
+        "image/notes/notes-photo.jpg"
+      ],
+      "videoUrl": "",
+      "githubLink": "https://github.com/DevOmarAmer/notes_app",
+      "conclusion": "The Notes App demonstrates proficiency in hybrid storage solutions, combining local and cloud storage for optimal performance and user experience. It showcases clean UI design and robust state management."
+    },
+    {
+      "id": "dashboard",
+      "title": "Responsive Dashboard",
+      "image": "image/dashboard/photo.jpg",
+      "coverImage": "image/dashboard/photo.jpg",
+      "description": "Responsive admin dashboard with data visualization and analytics features",
+      "overview": "A fully responsive admin dashboard built with Flutter that adapts seamlessly to mobile, tablet, and desktop screens. Features comprehensive data visualization, user management, and real-time analytics with an intuitive interface designed for administrators.",
+      "features": [
+        "Responsive design for all screen sizes",
+        "Interactive data visualization charts",
+        "User management system",
+        "Real-time analytics and statistics",
+        "Dark/Light theme support",
+        "Role-based access control",
+        "Export data functionality",
+        "Customizable dashboard widgets",
+        "Activity logs and monitoring",
+        "Performance metrics tracking"
+      ],
+      "technologies": ["Flutter", "Charts", "Responsive Design"],
+      "technologiesUsed": [
+        "Flutter for cross-platform development",
+        "FL Chart for data visualization",
+        "Responsive framework implementation",
+        "Provider for state management",
+        "Firebase for backend services",
+        "Custom responsive widgets",
+        "Adaptive layouts for multiple screen sizes"
+      ],
+      "gallery": [
+        "image/dashboard/photo.jpg"
+      ],
+      "videoUrl": "",
+      "githubLink": "https://github.com/DevOmarAmer/flutter_responsive_dashboard",
+      "conclusion": "This dashboard project showcases advanced responsive design techniques and data visualization skills, demonstrating the ability to create professional-grade admin interfaces that work seamlessly across all devices."
+    },
+    {
+      "id": "fire-detection",
+      "title": "Fire Detection System",
+      "image": "image/firedetection app/photo.png",
+      "coverImage": "image/firedetection app/photo.png",
+      "description": "IoT-integrated mobile application for real-time fire and smoke detection in vehicles",
+      "overview": "An innovative IoT-based mobile application designed for real-time fire and smoke detection in vehicles. The system provides instant alerts through push notifications, tracks vehicle location, and maintains comprehensive safety analytics to ensure rapid response to emergencies.",
+      "features": [
+        "Real-time fire and smoke detection",
+        "Push notification alerts",
+        "GPS location tracking",
+        "Emergency contact auto-dial",
+        "Historical data and analytics",
+        "Multiple sensor integration",
+        "Battery status monitoring",
+        "Alert customization settings",
+        "Vehicle safety dashboard",
+        "Incident reporting system"
+      ],
+      "technologies": ["Flutter", "IoT", "Firebase", "Real-time Monitoring"],
+      "technologiesUsed": [
+        "Flutter for mobile app development",
+        "IoT sensor integration",
+        "Firebase Cloud Messaging for notifications",
+        "Firebase Realtime Database",
+        "Google Maps API for location services",
+        "MQTT protocol for IoT communication",
+        "WebSocket for real-time data",
+        "Custom alert system implementation"
+      ],
+      "gallery": [
+        "image/firedetection app/photo.png"
+      ],
+      "videoUrl": "",
+      "githubLink": "https://github.com/DevOmarAmer/fire_detection",
+      "conclusion": "The Fire Detection System demonstrates expertise in IoT integration, real-time monitoring, and emergency response systems. It highlights the ability to build life-saving applications with critical real-time functionality and reliable alert mechanisms."
+    },
+    {
+      "id": "weather-app",
+      "title": "Weather App",
+      "image": "image/weather_app/photo.jpg",
+      "coverImage": "image/weather_app/photo.jpg",
+      "description": "Elegant weather application with real-time forecasts and animated visualizations",
+      "overview": "A beautifully designed weather application that provides accurate real-time weather forecasts, hourly and weekly predictions, and location-based services. Features stunning animated weather visualizations and a clean, intuitive interface that makes checking the weather a delightful experience.",
+      "features": [
+        "Real-time weather updates",
+        "Hourly and 7-day forecasts",
+        "Location-based weather detection",
+        "Beautiful animated weather icons",
+        "Multiple location management",
+        "Weather alerts and warnings",
+        "Temperature unit conversion",
+        "Wind, humidity, and pressure details",
+        "Sunrise and sunset times",
+        "Air quality index information"
+      ],
+      "technologies": ["Flutter", "Weather API", "Animations"],
+      "technologiesUsed": [
+        "Flutter for cross-platform development",
+        "OpenWeather API for weather data",
+        "Custom animations and transitions",
+        "Geolocator for location services",
+        "Provider for state management",
+        "Lottie animations for weather effects",
+        "HTTP package for API integration",
+        "Shared preferences for data persistence"
+      ],
+      "gallery": [
+        "image/weather_app/photo.jpg"
+      ],
+      "videoUrl": "",
+      "githubLink": "https://github.com/DevOmarAmer/weather_app",
+      "conclusion": "The Weather App showcases expertise in API integration, animation implementation, and creating visually appealing user interfaces. It demonstrates the ability to transform data into beautiful, user-friendly applications with smooth animations and intuitive design."
+    }
+  ]
+}

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Admin Panel - Manage Projects</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-content">
+                <h1><i class="fas fa-cog"></i> Portfolio Admin Panel</h1>
+                <a href="../index.html" class="btn btn-secondary" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> View Portfolio
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Sidebar -->
+            <aside class="admin-sidebar">
+                <nav class="admin-nav">
+                    <a href="#" class="nav-item active" data-section="projects">
+                        <i class="fas fa-folder-open"></i> Projects
+                    </a>
+                    <a href="#" class="nav-item" data-section="add-project">
+                        <i class="fas fa-plus-circle"></i> Add New Project
+                    </a>
+                    <a href="#" class="nav-item" data-section="settings">
+                        <i class="fas fa-sliders-h"></i> Settings
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Content Area -->
+            <div class="admin-content">
+                <!-- Projects List Section -->
+                <section id="projects-section" class="content-section active">
+                    <div class="section-header">
+                        <h2><i class="fas fa-folder-open"></i> Manage Projects</h2>
+                        <button class="btn btn-primary" onclick="showAddProjectForm()">
+                            <i class="fas fa-plus"></i> Add New Project
+                        </button>
+                    </div>
+
+                    <div class="projects-list" id="projectsList">
+                        <!-- Projects will be loaded here dynamically -->
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i> Loading projects...
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Add/Edit Project Section -->
+                <section id="add-project-section" class="content-section">
+                    <div class="section-header">
+                        <h2 id="formTitle"><i class="fas fa-plus-circle"></i> Add New Project</h2>
+                        <button class="btn btn-secondary" onclick="cancelProjectForm()">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+
+                    <form id="projectForm" class="project-form">
+                        <input type="hidden" id="projectId">
+                        <input type="hidden" id="editIndex">
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="title">
+                                    <i class="fas fa-heading"></i> Project Title *
+                                </label>
+                                <input type="text" id="title" class="form-control" required placeholder="Enter project title">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category">
+                                    <i class="fas fa-tag"></i> Primary Category *
+                                </label>
+                                <select id="category" class="form-control" required>
+                                    <option value="">Select category...</option>
+                                    <option value="mobile">Mobile App</option>
+                                    <option value="web">Web App</option>
+                                    <option value="ui">UI/UX Design</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <i class="fas fa-tags"></i> Additional Categories
+                            </label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="categories" value="mobile"> Mobile
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="categories" value="web"> Web
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="categories" value="ui"> UI/UX
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">
+                                <i class="fas fa-image"></i> Image Path *
+                            </label>
+                            <input type="text" id="image" class="form-control" required placeholder="image/project-name/photo.jpg">
+                            <small class="form-text">Relative path to image from portfolio root</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">
+                                <i class="fas fa-align-left"></i> Description *
+                            </label>
+                            <textarea id="description" class="form-control" rows="4" required placeholder="Describe your project..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="overview">
+                                <i class="fas fa-info-circle"></i> Detailed Overview
+                            </label>
+                            <textarea id="overview" class="form-control" rows="3" placeholder="Detailed project overview (optional - uses description if not provided)"></textarea>
+                            <small class="form-text">Leave empty to use the main description</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="features">
+                                <i class="fas fa-list-ul"></i> Features (one per line)
+                            </label>
+                            <textarea id="features" class="form-control" rows="4" placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="technologies">
+                                <i class="fas fa-code"></i> Technologies (comma-separated)
+                            </label>
+                            <input type="text" id="technologies" class="form-control" placeholder="Flutter, Firebase, Dart">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="technologiesUsed">
+                                <i class="fas fa-toolbox"></i> Technologies Details (one per line - optional)
+                            </label>
+                            <textarea id="technologiesUsed" class="form-control" rows="3" placeholder="Flutter for cross-platform development&#10;Firebase for authentication&#10;Provider for state management"></textarea>
+                            <small class="form-text">Detailed descriptions - leave empty to auto-generate</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="coverImage">
+                                    <i class="fas fa-image"></i> Cover Image (optional)
+                                </label>
+                                <input type="text" id="coverImage" class="form-control" placeholder="Leave empty to use main image">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="githubLink">
+                                    <i class="fab fa-github"></i> GitHub Link
+                                </label>
+                                <input type="url" id="githubLink" class="form-control" placeholder="https://github.com/username/repo">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gallery">
+                                <i class="fas fa-images"></i> Gallery Images (one path per line)
+                            </label>
+                            <textarea id="gallery" class="form-control" rows="3" placeholder="image/project/screenshot1.jpg&#10;image/project/screenshot2.jpg&#10;image/project/screenshot3.jpg"></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="videoUrl">
+                                    <i class="fas fa-video"></i> Video URL (YouTube/Vimeo)
+                                </label>
+                                <input type="url" id="videoUrl" class="form-control" placeholder="https://youtu.be/...">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="videoThumbnail">
+                                    <i class="fas fa-image"></i> Video Thumbnail
+                                </label>
+                                <input type="text" id="videoThumbnail" class="form-control" placeholder="Leave empty to use main image">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="conclusion">
+                                <i class="fas fa-check-circle"></i> Conclusion (optional)
+                            </label>
+                            <textarea id="conclusion" class="form-control" rows="2" placeholder="Project conclusion - leave empty for auto-generation"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="featured"> 
+                                <i class="fas fa-star"></i> Mark as Featured Project
+                            </label>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Save Project
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="cancelProjectForm()">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Preview Section -->
+                    <div class="project-preview">
+                        <h3><i class="fas fa-eye"></i> Live Preview</h3>
+                        <div id="previewCard" class="project-card-preview">
+                            <div class="project-image-preview">
+                                <img src="../image/placeholder.png" alt="Preview" id="previewImage" onerror="this.src='https://via.placeholder.com/400x250?text=Project+Image'">
+                                <div class="project-overlay">
+                                    <div class="project-links">
+                                        <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                                        <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-info-preview">
+                                <span class="project-category-preview" id="previewCategory">Flutter App</span>
+                                <h3 class="project-title-preview" id="previewTitle">Project Title</h3>
+                                <p class="project-desc-preview" id="previewDescription">Project description will appear here...</p>
+                                <div class="project-tech-preview" id="previewTechnologies">
+                                    <!-- Technologies will appear here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings-section" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-sliders-h"></i> Settings</h2>
+                    </div>
+
+                    <div class="settings-content">
+                        <div class="setting-card">
+                            <h3><i class="fas fa-download"></i> Export Data</h3>
+                            <p>Download your projects data as a JSON file</p>
+                            <button class="btn btn-primary" onclick="exportData()">
+                                <i class="fas fa-download"></i> Export Projects
+                            </button>
+                        </div>
+
+                        <div class="setting-card">
+                            <h3><i class="fas fa-upload"></i> Import Data</h3>
+                            <p>Import projects from a JSON file</p>
+                            <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(event)">
+                            <button class="btn btn-primary" onclick="document.getElementById('importFile').click()">
+                                <i class="fas fa-upload"></i> Import Projects
+                            </button>
+                        </div>
+
+                        <div class="setting-card">
+                            <h3><i class="fas fa-trash-alt"></i> Clear All Data</h3>
+                            <p>Remove all projects (cannot be undone)</p>
+                            <button class="btn btn-danger" onclick="clearAllData()">
+                                <i class="fas fa-trash-alt"></i> Clear All Projects
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Action completed successfully!</span>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
