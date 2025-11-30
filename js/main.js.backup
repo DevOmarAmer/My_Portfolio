@@ -403,9 +403,21 @@ navLinks.forEach(link => {
 // Load and render projects dynamically
 async function loadProjects() {
     console.log('loadProjects() called');
+    
+    // Wait for projects grid to be available
+    const projectsGrid = document.querySelector('.projects-grid');
+    if (!projectsGrid) {
+        console.error('Projects grid not found, retrying...');
+        setTimeout(loadProjects, 100);
+        return;
+    }
+    
     try {
         console.log('Fetching projects.json...');
         const response = await fetch('data/projects.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         console.log('Response received:', response.status);
         const data = await response.json();
         console.log('Projects data loaded:', data);
@@ -506,18 +518,23 @@ function renderProjects(projects) {
         console.error('Projects grid not found!');
         return;
     }
-    if (!projects) {
+    if (!projects || projects.length === 0) {
         console.error('No projects data!');
+        projectsGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem;">No projects found.</div>';
         return;
     }
 
+    // Clear loading message
+    projectsGrid.innerHTML = '';
+    
+    // Render projects
     projectsGrid.innerHTML = projects.map(project => `
         <div class="project-card animate-on-scroll" data-animation="fadeInUp" data-category="${project.categories.join(' ')}">
             <div class="project-image">
                 <img src="${project.image}" alt="${project.title}" loading="lazy">
                 <div class="project-overlay">
                     <div class="project-links">
-                        ${project.detailsPage ? `<a href="${project.detailsPage}" class="project-link"><i class="fas fa-link"></i></a>` : ''}
+                        ${project.detailsPage ? `<a href="project-details.html?id=${project.id}" class="project-link"><i class="fas fa-link"></i></a>` : ''}
                         ${project.githubLink ? `<a href="${project.githubLink}" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>` : ''}
                     </div>
                 </div>
@@ -526,14 +543,22 @@ function renderProjects(projects) {
                 <span class="project-category">${getCategoryLabel(project.category)}</span>
                 <h3 class="project-title">${project.title}</h3>
                 <p class="project-desc">${project.description}</p>
-                ${project.detailsPage ? `<a href="${project.detailsPage}" class="btn btn-sm">View Details</a>` : ''}
+                <a href="project-details.html?id=${project.id}" class="btn btn-sm">View Details</a>
             </div>
         </div>
     `).join('');
 
+    // Force immediate display and then trigger animations
+    const newProjectCards = projectsGrid.querySelectorAll('.project-card');
+    newProjectCards.forEach(card => {
+        // Make cards visible immediately
+        card.style.opacity = '1';
+        card.style.visibility = 'visible';
+    });
+
     // Re-initialize animations for new elements
     setTimeout(() => {
-        const animateElements = document.querySelectorAll('.animate-on-scroll');
+        const animateElements = projectsGrid.querySelectorAll('.animate-on-scroll');
         const triggerBottom = window.innerHeight * 0.8;
         
         animateElements.forEach(element => {
@@ -552,7 +577,7 @@ function renderProjects(projects) {
                 }
             }
         });
-    }, 100);
+    }, 50);
 }
 
 // Get category label

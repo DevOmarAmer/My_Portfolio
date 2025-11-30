@@ -1,0 +1,21 @@
+/**
+ * Main CSS Entry Point
+ * Imports all modular CSS files in the correct order
+ * 
+ * Architecture:
+ * 1. Base - CSS variables, resets, typography
+ * 2. Layout - Grid system, containers
+ * 3. Utilities - Helper classes
+ * 4. Components - All UI components
+ * 
+ * Note: Base, Layout, and Utilities are extracted from modern.css
+ * modern.css still contains all component styles
+ */
+
+/* Import modular CSS files in dependency order */
+@import url('modules/base.css');
+@import url('modules/layout.css');
+@import url('modules/utilities.css');
+
+/* Import component styles - contains all page-specific styles */
+@import url('modern.css');

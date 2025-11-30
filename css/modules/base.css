@@ -1,0 +1,129 @@
+/**
+ * CSS Variables and Base Styles
+ * Foundation styles for the entire application
+ */
+
+:root {
+  /* Main colors */
+  --primary-color: #4361ee;
+  --primary-dark: #3a56d4;
+  --primary-light: #4e9eff;
+  --primary-rgb: 67, 97, 238;
+  
+  /* Secondary colors */
+  --secondary-color: #2b2d42;
+  --secondary-rgb: 43, 45, 66;
+  
+  /* Text colors */
+  --text-light: #f8f9fa;
+  --text-dark: #2b2d42;
+  --text-muted: #6c757d;
+  
+  /* Background colors */
+  --background-light: #ffffff;
+  --background-dark: #121212;
+  --background-gray: #f8f9fa;
+  
+  /* Accent colors */
+  --accent-color: #3f37c9;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --info-color: #17a2b8;
+  
+  /* UI elements */
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  --transition-speed: 0.3s;
+  --transition-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --border-radius-sm: 4px;
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+  
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  
+  /* Typography */
+  --font-family: 'Poppins', sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 2rem;
+  --font-size-xxxl: 3rem;
+  
+  /* Container widths */
+  --container-max-width: 1200px;
+  --container-narrow: 900px;
+}
+
+/* Base Reset & Styles */
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: var(--text-dark);
+  background-color: var(--background-gray);
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+h1 { font-size: var(--font-size-xxxl); }
+h2 { font-size: var(--font-size-xxl); }
+h3 { font-size: var(--font-size-xl); }
+h4 { font-size: var(--font-size-lg); }
+h5 { font-size: var(--font-size-md); }
+h6 { font-size: var(--font-size-sm); }
+
+p {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-dark);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: all var(--transition-speed) var(--transition-function);
+  position: relative;
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
