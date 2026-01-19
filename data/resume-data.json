@@ -1,0 +1,102 @@
+{
+  "personalInfo": {
+    "name": "Omar Amer",
+    "title": "Flutter Developer",
+    "location": "Cairo, Egypt",
+    "phone": "+201151056694",
+    "email": "omahar1907@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/omar-amer-fathy",
+    "github": "https://www.github.com/DevOmarAmer",
+    "photo": "image/omar.jpg"
+  },
+  "profile": "I am a recent graduate with a degree in Computer Science from the Faculty of Computers and Artificial Intelligence, Class of 2024. I specialize in mobile app development using Flutter and have a strong passion for building efficient, cross-platform applications. My experience includes working with Dart, Firebase, and various APIs to create user-friendly and functional apps. I am constantly expanding my knowledge by solving development challenges and sharing insights with the Flutter community. I am driven by a desire to innovate and contribute to impactful projects in the tech industry.",
+  "skills": [
+    "Proficient in Flutter framework and Dart programming language",
+    "Responsive and Adaptive UI Design",
+    "Cross-Platform Mobile Development (iOS & Android)",
+    "RESTful APIs Integration",
+    "Firebase Integration",
+    "State Management (Provider, Bloc, GetX)",
+    "Clean Architecture",
+    "Performance Optimization",
+    "CI/CD Implementation",
+    "Strong problem-solving skills",
+    "Familiarity with JSON",
+    "Git and GitHub",
+    "SOLID Principles",
+    "Design Patterns",
+    "Clean Code"
+  ],
+  "education": [
+    {
+      "id": 1,
+      "institution": "Faculty of Computer Science and Artificial Intelligence, Matrouh University, Egypt",
+      "degree": "Bachelor of Computer Science",
+      "period": "2020 - 2024",
+      "graduationDate": "September 2024",
+      "gpa": "3.2/4.0",
+      "graduationProject": {
+        "title": "Fire Detection System",
+        "grade": "Excellent",
+        "description": "A Flutter mobile app integrated with an IoT device in vehicles to detect fire or smoke, sending real-time alerts to users with push notifications and sound. It also provides sensor status, car location, and fire detection statistics."
+      }
+    }
+  ],
+  "certificates": [
+    {
+      "id": 1,
+      "name": "Flutter Development Bootcamp",
+      "issuer": "Udemy",
+      "date": "2023",
+      "credentialUrl": "",
+      "image": "",
+      "description": "Comprehensive Flutter development course covering widgets, state management, and app deployment"
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "name": "Advanced Flutter Development",
+      "platform": "Udacity",
+      "date": "2023",
+      "skills": ["Flutter", "Dart", "State Management"],
+      "description": "Deep dive into Flutter architecture and advanced concepts"
+    }
+  ],
+  "languages": [
+    "Arabic",
+    "English"
+  ],
+  "projects": [
+    {
+      "name": "Skill Swap",
+      "description": "A mobile app allowing users to exchange skills and services, built using Flutter and Firebase.",
+      "link": "skill_swap_details.html"
+    },
+    {
+      "name": "Notes App",
+      "description": "A cross-platform notes application with CRUD operations and integrated cloud storage for data synchronization.",
+      "link": "notes_app.html"
+    },
+    {
+      "name": "Weather App",
+      "description": "Developed a weather forecasting app that fetches real-time data from an API with an intuitive UI.",
+      "link": "project.html?id=weather-app"
+    },
+    {
+      "name": "Bookly App",
+      "description": "A mobile application helping users discover and read free books online using Flutter.",
+      "link": "bookly-details.html"
+    },
+    {
+      "name": "Chat App",
+      "description": "A real-time chat application built with Flutter and Firebase, featuring messaging and notifications.",
+      "link": "project.html?id=chat-app"
+    },
+    {
+      "name": "News App",
+      "description": "A news aggregation app fetching the latest headlines from a news API.",
+      "link": "project.html?id=news-app"
+    }
+  ]
+}

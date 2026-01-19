@@ -3,10 +3,12 @@
 // State management
 let projects = [];
 let editingIndex = -1;
+let resumeData = null;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
     loadProjects();
+    loadResumeData();
     setupEventListeners();
     setupFormPreview();
 });
@@ -48,7 +50,7 @@ function renderProjects() {
         <div class="project-item">
             <div class="project-item-image">
                 <img src="../${project.image}" alt="${project.title}" 
-                     onerror="this.src='https://via.placeholder.com/400x250?text=${encodeURIComponent(project.title)}'">
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27250%27%3E%3Crect fill=%27%23ddd%27 width=%27400%27 height=%27250%27/%3E%3Ctext fill=%27%23999%27 font-family=%27sans-serif%27 font-size=%2720%27 dy=%2710.5%27 font-weight=%27bold%27 x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27%3E${project.title}%3C/text%3E%3C/svg%3E'">
                 ${project.featured ? '<span class="project-featured-badge"><i class="fas fa-star"></i> Featured</span>' : ''}
             </div>
             <div class="project-item-content">
@@ -399,4 +401,421 @@ function showToast(message, type = 'success') {
     setTimeout(() => {
         toast.classList.remove('show');
     }, 3500);
+}
+
+// ============================================
+// RESUME MANAGEMENT FUNCTIONS
+// ============================================
+
+// Load resume data
+async function loadResumeData() {
+    try {
+        const response = await fetch('../data/resume-data.json');
+        resumeData = await response.json();
+        renderResumeData();
+    } catch (error) {
+        console.error('Error loading resume data:', error);
+        showToast('Error loading resume data', 'error');
+        // Initialize with empty data
+        resumeData = {
+            education: [],
+            certificates: [],
+            courses: [],
+            skills: [],
+            profile: ''
+        };
+    }
+}
+
+// Render resume data
+function renderResumeData() {
+    if (!resumeData) return;
+    
+    // Render education
+    renderEducationList();
+    
+    // Render certificates
+    renderCertificatesList();
+    
+    // Render courses
+    renderCoursesList();
+    
+    // Render skills
+    document.getElementById('skillsText').value = resumeData.skills ? resumeData.skills.join('\n') : '';
+    
+    // Render profile
+    document.getElementById('profileText').value = resumeData.profile || '';
+}
+
+// Render education list
+function renderEducationList() {
+    const list = document.getElementById('educationList');
+    if (!list) return;
+    
+    if (!resumeData.education || resumeData.education.length === 0) {
+        list.innerHTML = '<p class="empty-message">No education entries yet</p>';
+        return;
+    }
+    
+    list.innerHTML = resumeData.education.map((edu, index) => `
+        <div class="resume-item">
+            <div class="resume-item-content">
+                <h4>${edu.degree}</h4>
+                <p><strong>${edu.institution}</strong></p>
+                <p>${edu.period} ${edu.gpa ? `| GPA: ${edu.gpa}` : ''}</p>
+                ${edu.graduationProject ? `<p><em>Project: ${edu.graduationProject.title} (${edu.graduationProject.grade})</em></p>` : ''}
+            </div>
+            <div class="resume-item-actions">
+                <button class="btn btn-sm btn-primary" onclick="editEducation(${index})">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-danger" onclick="deleteEducation(${index})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Add education
+function addEducation() {
+    const institution = prompt('Institution name:');
+    if (!institution) return;
+    
+    const degree = prompt('Degree:');
+    if (!degree) return;
+    
+    const period = prompt('Period (e.g., 2020 - 2024):');
+    if (!period) return;
+    
+    const gpa = prompt('GPA (optional):');
+    const graduationDate = prompt('Graduation date (optional):');
+    
+    const hasProject = confirm('Add graduation project?');
+    let graduationProject = null;
+    
+    if (hasProject) {
+        const projectTitle = prompt('Project title:');
+        const projectGrade = prompt('Project grade:');
+        const projectDesc = prompt('Project description:');
+        
+        if (projectTitle) {
+            graduationProject = {
+                title: projectTitle,
+                grade: projectGrade || 'Excellent',
+                description: projectDesc || ''
+            };
+        }
+    }
+    
+    const newEdu = {
+        id: Date.now(),
+        institution,
+        degree,
+        period,
+        gpa: gpa || '',
+        graduationDate: graduationDate || '',
+        graduationProject
+    };
+    
+    if (!resumeData.education) resumeData.education = [];
+    resumeData.education.push(newEdu);
+    renderEducationList();
+    showToast('Education added!');
+}
+
+// Edit education
+function editEducation(index) {
+    const edu = resumeData.education[index];
+    
+    const institution = prompt('Institution name:', edu.institution);
+    if (!institution) return;
+    
+    const degree = prompt('Degree:', edu.degree);
+    if (!degree) return;
+    
+    const period = prompt('Period:', edu.period);
+    if (!period) return;
+    
+    const gpa = prompt('GPA:', edu.gpa);
+    const graduationDate = prompt('Graduation date:', edu.graduationDate);
+    
+    resumeData.education[index] = {
+        ...edu,
+        institution,
+        degree,
+        period,
+        gpa: gpa || '',
+        graduationDate: graduationDate || ''
+    };
+    
+    renderEducationList();
+    showToast('Education updated!');
+}
+
+// Delete education
+function deleteEducation(index) {
+    if (confirm('Delete this education entry?')) {
+        resumeData.education.splice(index, 1);
+        renderEducationList();
+        showToast('Education deleted!');
+    }
+}
+
+// Render certificates list
+function renderCertificatesList() {
+    const list = document.getElementById('certificatesList');
+    if (!list) return;
+    
+    if (!resumeData.certificates || resumeData.certificates.length === 0) {
+        list.innerHTML = '<p class="empty-message">No certificates yet</p>';
+        return;
+    }
+    
+    list.innerHTML = resumeData.certificates.map((cert, index) => `
+        <div class="resume-item">
+            ${cert.image ? `<div class="resume-item-image"><img src="../${cert.image}" alt="${cert.name}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;"></div>` : ''}
+            <div class="resume-item-content">
+                <h4>${cert.name}</h4>
+                <p><strong>${cert.issuer}</strong> ${cert.date ? `(${cert.date})` : ''}</p>
+                ${cert.description ? `<p>${cert.description}</p>` : ''}
+                ${cert.image ? `<p><small><i class="fas fa-image"></i> ${cert.image}</small></p>` : ''}
+                ${cert.credentialUrl ? `<p><a href="${cert.credentialUrl}" target="_blank"><i class="fas fa-link"></i> View</a></p>` : ''}
+            </div>
+            <div class="resume-item-actions">
+                <button class="btn btn-sm btn-primary" onclick="editCertificate(${index})">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-danger" onclick="deleteCertificate(${index})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Add certificate
+function addCertificate() {
+    const name = prompt('Certificate name:');
+    if (!name) return;
+    
+    const issuer = prompt('Issuer/Organization:');
+    if (!issuer) return;
+    
+    const date = prompt('Date (e.g., 2023 or Jan 2023):');
+    const description = prompt('Description (optional):');
+    const image = prompt('Image path (optional, e.g., image/certificates/cert.jpg):');
+    const credentialUrl = prompt('Credential URL (optional):');
+    
+    const newCert = {
+        id: Date.now(),
+        name,
+        issuer,
+        date: date || '',
+        description: description || '',
+        image: image || '',
+        credentialUrl: credentialUrl || ''
+    };
+    
+    if (!resumeData.certificates) resumeData.certificates = [];
+    resumeData.certificates.push(newCert);
+    renderCertificatesList();
+    showToast('Certificate added!');
+}
+
+// Edit certificate
+function editCertificate(index) {
+    const cert = resumeData.certificates[index];
+    
+    const name = prompt('Certificate name:', cert.name);
+    if (!name) return;
+    
+    const issuer = prompt('Issuer/Organization:', cert.issuer);
+    if (!issuer) return;
+    
+    const date = prompt('Date:', cert.date);
+    const description = prompt('Description:', cert.description);
+    const image = prompt('Image path:', cert.image);
+    const credentialUrl = prompt('Credential URL:', cert.credentialUrl);
+    
+    resumeData.certificates[index] = {
+        ...cert,
+        name,
+        issuer,
+        date: date || '',
+        description: description || '',
+        image: image || '',
+        credentialUrl: credentialUrl || ''
+    };
+    
+    renderCertificatesList();
+    showToast('Certificate updated!');
+}
+
+// Delete certificate
+function deleteCertificate(index) {
+    if (confirm('Delete this certificate?')) {
+        resumeData.certificates.splice(index, 1);
+        renderCertificatesList();
+        showToast('Certificate deleted!');
+    }
+}
+
+// Render courses list
+function renderCoursesList() {
+    const list = document.getElementById('coursesList');
+    if (!list) return;
+    
+    if (!resumeData.courses || resumeData.courses.length === 0) {
+        list.innerHTML = '<p class="empty-message">No courses yet</p>';
+        return;
+    }
+    
+    list.innerHTML = resumeData.courses.map((course, index) => `
+        <div class="resume-item">
+            <div class="resume-item-content">
+                <h4>${course.name}</h4>
+                <p><strong>${course.platform}</strong> ${course.date ? `(${course.date})` : ''}</p>
+                ${course.description ? `<p>${course.description}</p>` : ''}
+                ${course.skills ? `<p><small>${course.skills.join(', ')}</small></p>` : ''}
+            </div>
+            <div class="resume-item-actions">
+                <button class="btn btn-sm btn-primary" onclick="editCourse(${index})">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-danger" onclick="deleteCourse(${index})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Add course
+function addCourse() {
+    const name = prompt('Course name:');
+    if (!name) return;
+    
+    const platform = prompt('Platform (e.g., Udemy, Coursera):');
+    if (!platform) return;
+    
+    const date = prompt('Date (e.g., 2023):');
+    const description = prompt('Description (optional):');
+    const skillsInput = prompt('Skills learned (comma-separated, optional):');
+    
+    const skills = skillsInput ? skillsInput.split(',').map(s => s.trim()).filter(s => s) : [];
+    
+    const newCourse = {
+        id: Date.now(),
+        name,
+        platform,
+        date: date || '',
+        description: description || '',
+        skills
+    };
+    
+    if (!resumeData.courses) resumeData.courses = [];
+    resumeData.courses.push(newCourse);
+    renderCoursesList();
+    showToast('Course added!');
+}
+
+// Edit course
+function editCourse(index) {
+    const course = resumeData.courses[index];
+    
+    const name = prompt('Course name:', course.name);
+    if (!name) return;
+    
+    const platform = prompt('Platform:', course.platform);
+    if (!platform) return;
+    
+    const date = prompt('Date:', course.date);
+    const description = prompt('Description:', course.description);
+    const skillsInput = prompt('Skills (comma-separated):', course.skills ? course.skills.join(', ') : '');
+    
+    const skills = skillsInput ? skillsInput.split(',').map(s => s.trim()).filter(s => s) : [];
+    
+    resumeData.courses[index] = {
+        ...course,
+        name,
+        platform,
+        date: date || '',
+        description: description || '',
+        skills
+    };
+    
+    renderCoursesList();
+    showToast('Course updated!');
+}
+
+// Delete course
+function deleteCourse(index) {
+    if (confirm('Delete this course?')) {
+        resumeData.courses.splice(index, 1);
+        renderCoursesList();
+        showToast('Course deleted!');
+    }
+}
+
+// View resume JSON
+function viewResumeJSON() {
+    // Update data before viewing
+    const skillsText = document.getElementById('skillsText').value;
+    const tempData = {
+        ...resumeData,
+        skills: skillsText.split('\n').map(s => s.trim()).filter(s => s),
+        profile: document.getElementById('profileText').value
+    };
+    
+    const jsonWindow = window.open('', 'Resume JSON', 'width=800,height=600');
+    jsonWindow.document.write('<html><head><title>Resume Data JSON</title>');
+    jsonWindow.document.write('<style>body{font-family:monospace;padding:20px;background:#1e1e1e;color:#d4d4d4;}pre{white-space:pre-wrap;word-wrap:break-word;}</style>');
+    jsonWindow.document.write('</head><body>');
+    jsonWindow.document.write('<h2 style="color:#4fc3f7;">Current Resume Data</h2>');
+    jsonWindow.document.write('<pre>' + JSON.stringify(tempData, null, 2) + '</pre>');
+    jsonWindow.document.write('</body></html>');
+    jsonWindow.document.close();
+}
+
+// Save resume data
+function saveResumeData() {
+    // Update skills from textarea
+    const skillsText = document.getElementById('skillsText').value;
+    resumeData.skills = skillsText.split('\n').map(s => s.trim()).filter(s => s);
+    
+    // Update profile
+    resumeData.profile = document.getElementById('profileText').value;
+    
+    // Ensure all required fields exist
+    if (!resumeData.personalInfo) {
+        resumeData.personalInfo = {
+            name: "Omar Amer",
+            title: "Flutter Developer",
+            location: "Cairo, Egypt",
+            phone: "+201151056694",
+            email: "omahar1907@gmail.com",
+            linkedin: "https://www.linkedin.com/in/omar-amer-fathy",
+            github: "https://www.github.com/DevOmarAmer",
+            photo: "image/omar.jpg"
+        };
+    }
+    
+    // Create download
+    const dataStr = JSON.stringify(resumeData, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(dataBlob);
+    link.download = 'resume-data.json';
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    showToast('Resume data saved! Please replace the file in data/resume-data.json', 'warning');
+    
+    setTimeout(() => {
+        alert('Important:\n1. Copy the downloaded resume-data.json file\n2. Replace data/resume-data.json with it\n3. Refresh your resume page with Ctrl+F5');
+    }, 500);
 }

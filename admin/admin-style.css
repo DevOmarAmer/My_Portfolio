@@ -627,6 +627,80 @@ textarea.form-control {
     color: var(--text-dark);
 }
 
+/* Resume Management Styles */
+.resume-management {
+    display: grid;
+    gap: 2rem;
+}
+
+.resume-card {
+    background: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+}
+
+.resume-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.resume-card h3 i {
+    color: var(--primary-color);
+}
+
+.items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.resume-item {
+    background: var(--bg-gray);
+    padding: 1rem;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    border-left: 3px solid var(--primary-color);
+}
+
+.resume-item-content {
+    flex: 1;
+}
+
+.resume-item-content h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.resume-item-content p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+}
+
+.resume-item-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.empty-message {
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 1rem;
+    text-align: center;
+    background: var(--bg-gray);
+    border-radius: 6px;
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
     .admin-main {

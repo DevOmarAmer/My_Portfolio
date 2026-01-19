@@ -30,6 +30,9 @@
                     <a href="#" class="nav-item" data-section="add-project">
                         <i class="fas fa-plus-circle"></i> Add New Project
                     </a>
+                    <a href="#" class="nav-item" data-section="resume">
+                        <i class="fas fa-file-alt"></i> Resume
+                    </a>
                     <a href="#" class="nav-item" data-section="settings">
                         <i class="fas fa-sliders-h"></i> Settings
                     </a>
@@ -219,7 +222,7 @@
                         <h3><i class="fas fa-eye"></i> Live Preview</h3>
                         <div id="previewCard" class="project-card-preview">
                             <div class="project-image-preview">
-                                <img src="../image/placeholder.png" alt="Preview" id="previewImage" onerror="this.src='https://via.placeholder.com/400x250?text=Project+Image'">
+                                <img src="../image/placeholder.png" alt="Preview" id="previewImage" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27250%27%3E%3Crect fill=%27%23ddd%27 width=%27400%27 height=%27250%27/%3E%3Ctext fill=%27%23999%27 font-family=%27sans-serif%27 font-size=%2724%27 dy=%2710.5%27 font-weight=%27bold%27 x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27%3EProject Image%3C/text%3E%3C/svg%3E'">
                                 <div class="project-overlay">
                                     <div class="project-links">
                                         <a href="#" class="project-link"><i class="fas fa-link"></i></a>
@@ -235,6 +238,68 @@
                                     <!-- Technologies will appear here -->
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Resume Section -->
+                <section id="resume-section" class="content-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-file-alt"></i> Manage Resume</h2>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-secondary" onclick="viewResumeJSON()">
+                                <i class="fas fa-eye"></i> View JSON
+                            </button>
+                            <button class="btn btn-primary" onclick="saveResumeData()">
+                                <i class="fas fa-save"></i> Save All Changes
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="resume-management">
+                        <!-- Education Section -->
+                        <div class="resume-card">
+                            <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                            <div id="educationList" class="items-list">
+                                <!-- Education items will be loaded here -->
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="addEducation()">
+                                <i class="fas fa-plus"></i> Add Education
+                            </button>
+                        </div>
+
+                        <!-- Certificates Section -->
+                        <div class="resume-card">
+                            <h3><i class="fas fa-certificate"></i> Certificates</h3>
+                            <div id="certificatesList" class="items-list">
+                                <!-- Certificate items will be loaded here -->
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="addCertificate()">
+                                <i class="fas fa-plus"></i> Add Certificate
+                            </button>
+                        </div>
+
+                        <!-- Courses Section -->
+                        <div class="resume-card">
+                            <h3><i class="fas fa-book"></i> Courses</h3>
+                            <div id="coursesList" class="items-list">
+                                <!-- Course items will be loaded here -->
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="addCourse()">
+                                <i class="fas fa-plus"></i> Add Course
+                            </button>
+                        </div>
+
+                        <!-- Skills Section -->
+                        <div class="resume-card">
+                            <h3><i class="fas fa-tools"></i> Skills</h3>
+                            <textarea id="skillsText" class="form-control" rows="10" placeholder="One skill per line"></textarea>
+                        </div>
+
+                        <!-- Profile Section -->
+                        <div class="resume-card">
+                            <h3><i class="fas fa-user"></i> Profile Summary</h3>
+                            <textarea id="profileText" class="form-control" rows="6" placeholder="Your professional profile summary"></textarea>
                         </div>
                     </div>
                 </section>
